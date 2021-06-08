@@ -1,2 +1,2 @@
 # mensageria-example
-A project to study mico-services, messaging, Jenkins and much more
+A project to study mico-services, mensageria, Jenkins and much more
