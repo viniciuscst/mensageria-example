@@ -1,0 +1,28 @@
+server:
+    port: 8082
+spring:
+    application:
+        name: store
+    jpa:
+        show-sql: false
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+    jmx:
+        enabled: false
+    datasource:
+        url: jdbc:postgresql://localhost:15432/store
+        username: postgres
+        password: admin
+        driver-class-name: org.postgresql.Driver
+
+eureka:
+    instance:
+        prefer-ip-address: true
+    client:
+        service-url:
+            defaultZone: http://localhost:8081/eureka/
+        fetch-registry: true
+        register-with-eureka: true

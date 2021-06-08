@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  jenkins:
+    container_name: jenkins
+    build:
+      context: .
+    ports:
+    - "8084:8080"
+    volumes:
+    - c:/docker/jenkins:/var/jenkins_home

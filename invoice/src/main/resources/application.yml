@@ -1,0 +1,18 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: invoice
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: invoice
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
+    fetch-registry: true
