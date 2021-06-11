@@ -1,6 +1,6 @@
 package com.example.mensageria.store.repository;
 
-import br.com.luanrocha.store.entity.Product;
+import com.example.mensageria.store.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

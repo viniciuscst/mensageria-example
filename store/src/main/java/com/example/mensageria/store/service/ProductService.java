@@ -1,6 +1,6 @@
 package com.example.mensageria.store.service;
 
-import br.com.luanrocha.store.entity.Product;
+import com.example.mensageria.store.entity.Product;
 
 import java.util.List;
 import java.util.Optional;

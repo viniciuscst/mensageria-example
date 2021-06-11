@@ -1,8 +1,9 @@
 package com.example.mensageria.store.web.rest;
 
-import br.com.luanrocha.store.entity.Product;
-import br.com.luanrocha.store.service.ProductService;
-import br.com.luanrocha.store.service.impl.ProductServiceImpl;
+import com.example.mensageria.store.entity.Product;
+import com.example.mensageria.store.service.ProductService;
+import com.example.mensageria.store.service.impl.ProductServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class ProductController {
     }
 
     @PostMapping("/invoice")
-    public ResponseEntity<String> sendInvoice(@RequestBody Map<String, Long> map) {
+    public ResponseEntity<String> sendInvoice(@RequestBody Map<String, Long> map) throws JsonProcessingException {
         productService.sendInvoice(map.get("id"));
         return new ResponseEntity<String>("OK", HttpStatus.OK);
     }

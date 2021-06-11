@@ -17,7 +17,11 @@ spring:
         username: postgres
         password: admin
         driver-class-name: org.postgresql.Driver
-
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
 eureka:
     instance:
         prefer-ip-address: true

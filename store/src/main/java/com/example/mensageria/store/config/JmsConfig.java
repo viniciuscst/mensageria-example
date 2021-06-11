@@ -1,33 +1,28 @@
 package com.example.mensageria.store.config;
 
-import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jms.annotation.EnableJms;
-import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
-import org.springframework.jms.config.JmsListenerContainerFactory;
-import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
-import org.springframework.jms.support.converter.MessageConverter;
-import org.springframework.jms.support.converter.MessageType;
-
-import javax.jms.ConnectionFactory;
 
 @Configuration
-@EnableJms
 public class JmsConfig {
+   public static final String directExchangeName = "mensageria-exchange";
+
+    public static final String queueName = "invoice-queue";
 
     @Bean
-    public JmsListenerContainerFactory<?> factoryInvoice(ConnectionFactory connectionFactory, DefaultJmsListenerContainerFactoryConfigurer configure) {
-        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-        configure.configure(factory, connectionFactory);
-        return factory;
+    Queue queue() {
+        return new Queue(queueName, true);
     }
 
     @Bean
-    public MessageConverter jacksonJmsMessageConverter() {
-        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
-        converter.setTargetType(MessageType.TEXT);
-        converter.setTypeIdPropertyName("_type");
-        return converter;
+    DirectExchange exchange() {
+        return new DirectExchange(directExchangeName);
     }
+
+    @Bean
+    Binding binding(Queue queue, DirectExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with(queueName);
+    }
+
 }
