@@ -1,30 +1,31 @@
 package com.example.mensageria.invoice.service;
 
-import br.com.luanrocha.invoice.entity.Product;
-import br.com.luanrocha.invoice.repository.ProductRepository;
+import com.example.mensageria.invoice.entity.Product;
+import com.example.mensageria.invoice.repository.ProductRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.jms.annotation.JmsListener;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.stereotype.Service;
+
+import org.springframework.stereotype.Component;
+
 import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+@Component
 public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public ProductService(ProductRepository productRepository, JmsTemplate jmsTemplate) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @SneakyThrows
-    @JmsListener(destination = "invoice-queue", containerFactory = "factoryInvoice")
-    public void consumerProduct(String productJson) {
+    public void consumerProduct(String productJson) throws JsonProcessingException {
+
         Product product = new ObjectMapper().readValue(productJson,  Product.class);
 
         if(!product.isHasInvoice()) {
@@ -56,10 +57,5 @@ public class ProductService {
         HttpEntity<Map<String, Long>> requestUpdate = new HttpEntity<Map<String, Long>>(map, headers);
         restTemplate.put(url, requestUpdate);
     }
-
-
-
-
-
 
 }

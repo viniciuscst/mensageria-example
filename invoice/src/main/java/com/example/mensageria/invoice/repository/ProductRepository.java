@@ -1,7 +1,8 @@
 package com.example.mensageria.invoice.repository;
 
 
-import br.com.luanrocha.invoice.entity.Product;
+
+import com.example.mensageria.invoice.entity.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

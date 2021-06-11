@@ -3,3 +3,4 @@
 /invoice/mongodb
 /gateway/target
 /discovery/target
+/store/database
